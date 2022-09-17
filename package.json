@@ -1,6 +1,6 @@
 {
   "name": "howard-smoothscroll",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "How smooth scroll should be but in Vue3",
   "main": "index.js",
   "scripts": {

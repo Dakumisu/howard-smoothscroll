@@ -3,7 +3,6 @@ import { clamp, dampPrecise, deferredPromise, wait } from "../utils";
 import VirtualScroll from "./VirtualScroll";
 
 const DEFAULT_SETTINGS = {
-	label: "smoothScroll",
 	damping: 0.1,
 	direction: "vertical",
 	isDesktop: true,
@@ -14,8 +13,6 @@ export default function useSmoothScroll(opts = {}) {
 
 	let vueComponent = getCurrentInstance();
 	let unwatchResize = null;
-
-	let label = settings.label;
 
 	let el = null;
 	let parent = null;
@@ -31,7 +28,7 @@ export default function useSmoothScroll(opts = {}) {
 
 	let damping = clamp(settings.damping, 0, 1);
 	let smooth = damping > 0;
-	let direction = settings.direction || "vertical";
+	let direction = settings.direction;
 
 	let isScrollingTo = false;
 	let isMoving = false;
@@ -44,6 +41,8 @@ export default function useSmoothScroll(opts = {}) {
 		start,
 		stop,
 		refresh,
+
+		on: (cb) => handler.on(cb),
 
 		get el() {
 			return el;
@@ -73,14 +72,48 @@ export default function useSmoothScroll(opts = {}) {
 		get stopped() {
 			return stopped;
 		},
-		set stopped(v) {
-			if (typeof v === "boolean") stopped = v;
-		},
-
 		get complete() {
 			return complete;
 		},
+
+		set stopped(value) {
+			if (typeof value !== "boolean") return;
+			stopped = value;
+		},
+		set damping(value) {
+			damping = clamp(value, 0, 1);
+			smooth = damping > 0;
+		}
+		set direction(value) {
+			if (typeof value !== "string") return;
+			if (value !== "horizontal" && value !== "vertical") return;
+			direction = value;
+		},
 	};
+
+	const returnGetters = () => {
+		return {
+			el: api.el,
+			parent: api.parent,
+			scroll: api.scroll,
+			limit: api.limit,
+			velocity: api.velocity,
+			direction: api.direction,
+			isMoving: api.isMoving,
+			isScrollingTo: api.isScrollingTo,
+			stopped: api.stopped,
+			complete: api.complete,
+		};
+	};
+
+	// bind the handler methods with getters
+	api.on = (cb) => {
+		// supercharge the callback with getters
+		const originMethod = cb;
+		cb = (e) => originMethod(e, returnGetters());
+		return handler.on(cb);
+	};
+	api.off = (cb) => handler.off(cb);
 
 	onMounted(() => init());
 	onBeforeUnmount(() => destroy());
