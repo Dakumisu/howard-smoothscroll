@@ -28,7 +28,8 @@ npm install howard-smoothscroll
 > `data-scrollable` is the attribute that will be used to identify the scrollable area.
 
 &nbsp;
-###Options
+
+### Options
 ```ts
 const smoothScroll = useSmoothScroll({
     damping: <Number>, // Default: 0.1 (The higher the value, the more the scroll will be brutal)
