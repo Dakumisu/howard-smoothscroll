@@ -7,7 +7,7 @@ npm install howard-smoothscroll
 ```
 
 
-###Basic usage
+### Basic usage
 ```html
 <template>
     <div id="app">
@@ -51,7 +51,7 @@ const smoothScroll = useSmoothScroll({
 
 &nbsp;
 
-###Methods
+### Methods
 ```ts
 smoothScroll.scrollTo(<Number> || <String> || <HTMLElement>, { offset: <Number> });
 ```
@@ -74,7 +74,7 @@ smoothScroll.refresh();
 
 &nbsp;
 
-###Getters
+### Getters
 ```ts
 smoothScroll.stopped = <Boolean>
 ```
@@ -127,7 +127,7 @@ smoothScroll.isScrollingTo = <Boolean>
 
 &nbsp;
 
-###Setters
+### Setters
 ```ts
 smoothScroll.stopped = <Boolean>
 ```
@@ -145,7 +145,7 @@ smoothScroll.direction = <String>
 
 &nbsp;
 
-###Events
+### Events
 ```ts
 smoothScroll.on((virualScroll, getters) => {
     // const { scroll, limit, velocity, ...etc } = getters;
