@@ -42,8 +42,6 @@ export default function useSmoothScroll(opts = {}) {
 		stop,
 		refresh,
 
-		on: (cb) => handler.on(cb),
-
 		get el() {
 			return el;
 		},
