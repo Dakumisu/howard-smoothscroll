@@ -33,6 +33,7 @@ npm install howard-smoothscroll
 ```ts
 const smoothScroll = useSmoothScroll({
     damping: <Number>, // Default: 0.1 (The higher the value, the more the scroll will be brutal)
+    direction: <String>, // Default: 'vertical',
 
     /* Virual scroll parameters (optional) */
     // globalMult = .25
