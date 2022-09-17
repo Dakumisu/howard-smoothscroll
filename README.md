@@ -1,5 +1,5 @@
 # Howard SmoothScroll ⚡️
-*Based on lenis smoothscroll made by @studio-freight*
+*Vue3 SmoothScroll based on lenis smoothscroll made by @studio-freight*
 
 
 ```bash
