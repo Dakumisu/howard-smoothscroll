@@ -120,7 +120,7 @@ export default function useSmoothScroll(opts = {}) {
 
 		window.addEventListener("resize", onResize, false);
 
-		update();
+		window.requestAnimationFrame(update);
 
 		complete.resolve();
 	}
@@ -181,7 +181,7 @@ export default function useSmoothScroll(opts = {}) {
 		return onResize();
 	}
 
-	function update(dt) {
+	function update() {
 		if (stopped || !smooth) return;
 		// where smooth scroll happens
 

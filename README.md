@@ -1,13 +1,13 @@
 # Howard SmoothScroll ⚡️
-*Vue3 smooth scroll based on lenis made by @studio-freight*
 
+_Vue3 smooth scroll based on lenis made by @studio-freight_
 
 ```bash
 npm install howard-smoothscroll
 ```
 
-
 ### Basic usage
+
 ```html
 <template>
     <div id="app">
@@ -20,7 +20,7 @@ npm install howard-smoothscroll
 </template>
 
 <script>
-    import { useSmoothScroll } from 'howard-smoothscroll';
+    import { useSmoothScroll } from "howard-smoothscroll";
     const smoothScroll = useSmoothScroll();
 </script>
 ```
@@ -30,6 +30,7 @@ npm install howard-smoothscroll
 &nbsp;
 
 ### Options
+
 ```ts
 const smoothScroll = useSmoothScroll({
     damping: <Number>, // Default: 0.1 (The higher the value, the more the scroll will be brutal)
@@ -54,103 +55,119 @@ const smoothScroll = useSmoothScroll({
 &nbsp;
 
 ### Methods
+
 ```ts
 smoothScroll.scrollTo(<Number> || <String> || <HTMLElement>, { offset: <Number> });
 ```
+
 > Scroll to a specific position (in pixels) or to an element. You can also add an offset to the scroll position.
 
 ```ts
 smoothScroll.start();
 ```
+
 > Start the scroll.
 
 ```ts
 smoothScroll.stop();
 ```
+
 > Stop the scroll.
 
 ```ts
 smoothScroll.refresh();
 ```
+
 > Refresh the scroll. Useful when the scrollable area changes. Fired automatically on window resize.
 
 &nbsp;
 
 ### Getters
+
 ```ts
 smoothScroll.stopped = <Boolean>
 ```
+
 > If true, the scroll is stopped.
 
 ```ts
 smoothScroll.complete = <Promise>
 ```
+
 > Resolved when the scroll is complete.
 
 ```ts
 smoothScroll.el = <HTMLElement>
 ```
->The scrollable area.
+
+> The scrollable area.
 
 ```ts
 smoothScroll.parent = <HTMLElement>
 ```
+
 > The parent of the scrollable area.
 
 ```ts
 smoothScroll.scroll = <Number>
 ```
+
 > The current scroll position.
 
 ```ts
 smoothScroll.limit = <Number>
 ```
+
 > The maximum scroll position.
 
 ```ts
 smoothScroll.velocity = <Number>
 ```
+
 > The current scroll velocity.
 
 ```ts
 smoothScroll.direction = <String>
 ```
+
 > The current scroll direction.
 
 ```ts
 smoothScroll.isMoving = <Boolean>
 ```
+
 > If true, the scroll is moving.
 
 ```ts
 smoothScroll.isScrollingTo = <Boolean>
 ```
+
 > If true, the scroll is scrolling to a specific position.
 
 &nbsp;
 
 ### Setters
+
 ```ts
 smoothScroll.stopped = <Boolean>
 ```
+
 > If true, stop the scroll.
 
 ```ts
 smoothScroll.damping = <Number>
 ```
-> The higher the value, the more the scroll will be brutal.
 
-```ts
-smoothScroll.direction = <String>
-```
-> 'vertical' or 'horizontal'.
+> The higher the value, the more the scroll will be brutal.
 
 &nbsp;
 
 ### Events
+
 ```ts
-smoothScroll.on((virualScroll, getters) => {
-    // const { scroll, limit, velocity, ...etc } = getters;
+smoothScroll.on((virualScroll, e) => {
+    // const { scroll, limit, velocity, ...etc } = e;
 });
 ```
+
 > Fired when the scroll is updated.
