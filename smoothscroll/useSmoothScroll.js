@@ -8,6 +8,9 @@ const DEFAULT_SETTINGS = {
 	isDesktop: true,
 };
 
+let time = 0;
+let lastTime = 0;
+
 export default function useSmoothScroll(opts = {}) {
 	const settings = Object.assign(DEFAULT_SETTINGS, opts);
 
@@ -81,34 +84,14 @@ export default function useSmoothScroll(opts = {}) {
 		set damping(value) {
 			damping = clamp(value, 0, 1);
 			smooth = damping > 0;
-		}
-		set direction(value) {
-			if (typeof value !== "string") return;
-			if (value !== "horizontal" && value !== "vertical") return;
-			direction = value;
 		},
-	};
-
-	const returnGetters = () => {
-		return {
-			el: api.el,
-			parent: api.parent,
-			scroll: api.scroll,
-			limit: api.limit,
-			velocity: api.velocity,
-			direction: api.direction,
-			isMoving: api.isMoving,
-			isScrollingTo: api.isScrollingTo,
-			stopped: api.stopped,
-			complete: api.complete,
-		};
 	};
 
 	// bind the handler methods with getters
 	api.on = (cb) => {
 		// supercharge the callback with getters
 		const originMethod = cb;
-		cb = (e) => originMethod(e, returnGetters());
+		cb = (e) => originMethod(e, api);
 		return handler.on(cb);
 	};
 	api.off = (cb) => handler.off(cb);
@@ -203,8 +186,11 @@ export default function useSmoothScroll(opts = {}) {
 		// where smooth scroll happens
 
 		let lastScroll = scroll;
+		lastTime = time;
+		time = performance.now();
 
 		// lerp scroll value
+		const dt = time - lastTime;
 		const ease = isScrollingTo ? 0.05 : damping + (isDesktop ? 0 : 0.2);
 		scroll = dampPrecise(scroll, targetScroll, ease, dt, 0.01);
 		if (Math.round(scroll) === Math.round(targetScroll)) {
